@@ -56,6 +56,7 @@ public class Recipe extends Controller {
    */
   public void Delete() {
     renderText("OK");
+
   }
 
   /**
