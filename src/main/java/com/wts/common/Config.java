@@ -5,10 +5,13 @@ import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.tx.TxByMethods;
+import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.wts.controller.Main;
+import com.wts.util.Dinner;
+import com.wts.util.Lunch;
 
 /**
  * API引导式配置
@@ -40,6 +43,14 @@ public class Config extends JFinalConfig {
 
         DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password").trim());
         me.add(druidPlugin);
+
+        //配置任务调度插件
+        Cron4jPlugin cp = new Cron4jPlugin();
+//        cp.addTask("0 0 9 * * ? ", new Lunch());
+//        cp.addTask("0 0 14 * * ? ", new Dinner());
+        cp.addTask("*/1 * * * *", new Lunch());
+//        cp.addTask("*/2 * * * *", new Dinner());
+        me.add(cp);
 ;
     }
     public static DruidPlugin createDruidPlugin() {

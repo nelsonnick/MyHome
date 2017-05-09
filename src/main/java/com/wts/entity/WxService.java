@@ -8,13 +8,7 @@ public class WxService extends WxCpServiceImpl{
   private volatile static WxService wxService;
 
   private WxService() {
-    WxCpInMemoryConfigStorage config = new WxCpInMemoryConfigStorage();
-    config.setCorpId(ParamesAPI.corpId);
-    config.setCorpSecret(ParamesAPI.secret);
-    config.setAgentId(1000002);
-    config.setToken(ParamesAPI.token);
-    config.setAesKey(ParamesAPI.encodingAESKey);
-    this.setWxCpConfigStorage(config);
+    this.setWxCpConfigStorage(WxConfig.getMe());
   }
 
   public static WxService getMe() {
