@@ -3,19 +3,15 @@ package com.wts.common;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
-import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.tx.TxByMethods;
 import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
-import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.wts.controller.Main;
 import com.wts.controller.RecipeController;
 import com.wts.entity.model._MappingKit;
-import com.wts.util.Dinner;
-import com.wts.util.Lunch;
 
 /**
  * API引导式配置
@@ -35,6 +31,7 @@ public class Config extends JFinalConfig {
      * 配置路由
      */
     public void configRoute(Routes me) {
+//        me.setBaseViewPath("/myhome");
         me.add("/", Main.class);
         me.add("/r", RecipeController.class);
     }
@@ -54,6 +51,7 @@ public class Config extends JFinalConfig {
         Cron4jPlugin cp = new Cron4jPlugin();
 //        cp.addTask("0 0 9 * * ? ", new Lunch());
 //        cp.addTask("0 0 14 * * ? ", new Dinner());
+//        cp.addTask("0 0 20 * * ? ", new Breakfast());
 //        cp.addTask("*/1 * * * *", new Lunch());
 //        cp.addTask("*/2 * * * *", new Dinner());
         me.add(cp);

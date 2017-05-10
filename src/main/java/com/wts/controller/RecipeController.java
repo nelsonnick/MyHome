@@ -5,6 +5,7 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.wts.entity.model.Recipe;
 
+
 public class RecipeController extends Controller {
   /**
    * 页面
@@ -61,21 +62,22 @@ public class RecipeController extends Controller {
             && !StrKit.isBlank(getPara("season"))
             && !StrKit.isBlank(getPara("type"))
             ) {
-      Recipe object = new Recipe();
-      object.set("name", getPara("name"))
-              .set("url", getPara("url"))
-              .set("time", getPara("time"))
-              .set("season", getPara("season"))
-              .set("type", getPara("type"))
-              .save();
-      renderText("OK");
+      if (Recipe.dao.find("SELECT id FROM recipe WHERE name = ?", getPara("name").trim()).size() == 0) {
+        Recipe object = new Recipe();
+        object.set("name", getPara("name"))
+                .set("url", getPara("url"))
+                .set("time", getPara("time"))
+                .set("season", getPara("season"))
+                .set("type", getPara("type"))
+                .save();
+        renderText("OK");
+      } else {
+        renderText("该菜品已存在！");
+      }
     } else {
       renderText("存在未填写的内容");
     }
   }
 
 
-  public void getVegetarian() {
-    Recipe.dao.find("SELECT * FROM recipe WHERE type='素菜'");
-  }
 }

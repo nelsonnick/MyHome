@@ -40,10 +40,6 @@
               <span slot="close">晚餐</span>
             </i-switch>
             <i-switch v-model="time4" size="large">
-              <span slot="open">宵夜</span>
-              <span slot="close">宵夜</span>
-            </i-switch>
-            <i-switch v-model="time5" size="large">
               <span slot="open">加餐</span>
               <span slot="close">加餐</span>
             </i-switch>
@@ -88,13 +84,11 @@
         time2: true,
         time3: true,
         time4: true,
-        time5: true,
         time: '',
         word1: '',
         word2: '',
         word3: '',
         word4: '',
-        word5: '',
         season1: true,
         season2: true,
         season3: true,
@@ -106,7 +100,7 @@
         words4: '',
         object: {
           name: '',
-          url: '',
+          url: '###',
           type: '素菜'
         }
       }
@@ -115,9 +109,8 @@
       goReset () {
         this.$refs.addForm.resetFields()
         this.object.name = ''
-        this.object.url = ''
-        this.object.type = '1'
-        this.object.state = '1'
+        this.object.url = '###'
+        this.object.type = '素菜'
       },
       goSave () {
         if (this.time1) {
@@ -136,16 +129,11 @@
           this.word3 = ''
         }
         if (this.time4) {
-          this.word4 = '夜'
+          this.word4 = '加'
         } else {
           this.word4 = ''
         }
-        if (this.time5) {
-          this.word5 = '加'
-        } else {
-          this.word5 = ''
-        }
-        this.time = this.word1 + this.word2 + this.word3 + this.word4 + this.word5
+        this.time = this.word1 + this.word2 + this.word3 + this.word4
         if (this.season1) {
           this.words1 = '春'
         } else {
