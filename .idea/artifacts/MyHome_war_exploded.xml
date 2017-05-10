@@ -23,6 +23,8 @@
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.23" />
           <element id="library" level="project" name="Maven: com.alibaba:druid:1.0.27" />
+          <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.5.2" />
+          <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.11" />
           <element id="library" level="project" name="Maven: it.sauronsoftware.cron4j:cron4j:2.2.5" />
           <element id="library" level="project" name="Maven: com.github.binarywang:weixin-java-cp:2.6.0" />
           <element id="library" level="project" name="Maven: com.github.binarywang:weixin-java-common:2.6.0" />

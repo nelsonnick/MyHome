@@ -3,8 +3,8 @@
     <Row v-show="!showLoad">
       <Col>
         <div>
-          <div class="left"><Button type="info" size="large" @click="goAdd" v-if="permission.Save">新增</Button></div>
-          <div class="right"><Search @goQuery="getQuery" @goDownload="getDownload" :download="download"></Search></div>
+          <div class="left"><Button type="info" size="large" @click="goAdd" >新增</Button></div>
+          <div class="right"><Search @goQuery="getQuery" :download="download"></Search></div>
         </div>
       </Col>
     </Row>
@@ -56,8 +56,7 @@
         <span>删除确认</span>
       </p>
       <div style="text-align:center">
-        <p>即将要删除班级（{{rname}}）与学生（{{sname}}）的关系</p>
-        <p>关系删除后需要重新绑定。</p>
+        <p>即将要删除菜谱（{{name}}）</p>
         <p>该功能必须慎用！</p>
         <p>是否继续删除？</p>
       </div>
@@ -112,13 +111,13 @@
             sortable: true
           },
           {
-            title: '学生证件号码',
-            key: 'snumber',
+            title: '使用时间',
+            key: 'time',
             sortable: true
           },
           {
-            title: '学生学籍号码',
-            key: 'scode',
+            title: '食用季节',
+            key: 'season',
             sortable: true
           },
           {

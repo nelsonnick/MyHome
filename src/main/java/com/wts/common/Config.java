@@ -3,13 +3,17 @@ package com.wts.common;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.tx.TxByMethods;
 import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.wts.controller.Main;
+import com.wts.controller.RecipeController;
+import com.wts.entity.model._MappingKit;
 import com.wts.util.Dinner;
 import com.wts.util.Lunch;
 
@@ -33,7 +37,7 @@ public class Config extends JFinalConfig {
      */
     public void configRoute(Routes me) {
         me.add("/", Main.class);
-
+        me.add("/recipe", RecipeController.class);
     }
 
     /**
@@ -43,7 +47,12 @@ public class Config extends JFinalConfig {
 
         DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password").trim());
         me.add(druidPlugin);
-
+        // 配置ActiveRecord插件
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+        arp.setBaseSqlTemplatePath(PathKit.getRootClassPath());
+        arp.addSqlTemplate("run.sql");
+        _MappingKit.mapping(arp);
+        me.add(arp);
         //配置任务调度插件
         Cron4jPlugin cp = new Cron4jPlugin();
 //        cp.addTask("0 0 9 * * ? ", new Lunch());

@@ -21,15 +21,6 @@ const router = new VueRouter({
   routes // （缩写）相当于 routes: routes
 })
 
-router.beforeEach((to, from, next) => {
-  iView.LoadingBar.start()
-  next()
-})
-
-router.afterEach((to, from, next) => {
-  iView.LoadingBar.finish()
-})
-
 const store = new Vuex.Store({
   state: {
     keyword: '',
