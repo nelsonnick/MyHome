@@ -132,6 +132,7 @@
             width: 200,
             render (row, column, index) {
               return `
+              <i-button type="info" @click="goLook(${index})">网站链接</i-button>
               <i-button type="error" @click="showDelete(${index})">删除</i-button>
               `
             }
@@ -185,6 +186,9 @@
       },
       goAdd () {
         this.$router.push({ path: '/add' })
+      },
+      goLook (index) {
+        window.open(this.pageList[index].url)
       },
       goDelete () {
         this.$Loading.start()
