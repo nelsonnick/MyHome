@@ -15,21 +15,15 @@
           <Icon type="refresh"></Icon>
           重置
         </Button>
-        <Button type="ghost" @click="goDownload" v-if="download">
-          <Icon type="android-download"></Icon>
-          下载
-        </Button>
       </Button-group>
     </div>
   </div>
 </template>
 <script>
   export default {
-    props: ['download'],
     data () {
       return {
-        keyword: '',
-        download: false
+        keyword: ''
       }
     },
     methods: {
@@ -39,9 +33,6 @@
       goRefresh () {
         this.keyword = ''
         this.$emit('goQuery', this.keyword)
-      },
-      goDownload () {
-        this.$emit('goDownload', this.keyword)
       }
     }
   }

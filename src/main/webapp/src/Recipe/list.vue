@@ -1,14 +1,21 @@
 <template>
   <div class="layout">
-    <Row v-show="!showLoad">
+    <Row>
+      <Col>
+        <Menu mode="horizontal" theme="dark">
+          <div class="layout-nav"></div>
+        </Menu>
+      </Col>
+    </Row>
+    <Row>
       <Col>
         <div>
           <div class="left"><Button type="info" size="large" @click="goAdd" >新增</Button></div>
-          <div class="right"><Search @goQuery="getQuery" :download="download"></Search></div>
+          <div class="right"><Search @goQuery="getQuery" ></Search></div>
         </div>
       </Col>
     </Row>
-    <Row v-show="!showLoad">
+    <Row>
       <Col>
         <div class="layout-content">
           <Table
@@ -24,7 +31,7 @@
         </div>
       </Col>
     </Row>
-    <Row v-show="!showLoad">
+    <Row >
       <Col>
       <div>
         <div class="left">
@@ -67,9 +74,9 @@
   </div>
 </template>
 <script>
-  import Search from '../../Common/search.vue'
-  import Page from '../../Common/page.vue'
-  import Options from '../../Common/options.vue'
+  import Search from '../Common/search.vue'
+  import Page from '../Common/page.vue'
+  import Options from '../Common/options.vue'
   import * as API from './API.js'
   export default {
     name: 'list',
@@ -77,13 +84,11 @@
     data () {
       return {
         name: '',
-        download: true,
         query: API.query,
         total: API.total,
         keyword: '',
         pageList: [],
         pageTotal: '',
-        showLoad: true,
         del: false,
         index: '',
         border: false,
@@ -127,7 +132,7 @@
             width: 200,
             render (row, column, index) {
               return `
-              <i-button type="error" @click="showDelete(${index})" v-if="permission.Delete">删除</i-button>
+              <i-button type="error" @click="showDelete(${index})">删除</i-button>
               `
             }
           }
@@ -148,12 +153,6 @@
       getQueryNoChange (keyword) {
         this.keyword = keyword
         this.$refs.pages.queryNoChange(keyword)
-      },
-      getDownload (keyword) {
-        this.keyword = keyword
-        this.$Loading.start()
-        this.$Message.info('正在进行导出操作，请稍后...')
-        window.location.href = API.download + '?keyword=' + keyword
       },
       getBorder (border) {
         this.border = border
@@ -230,6 +229,10 @@
   .layout{
     border: 1px solid #d7dde4;
     background: #f5f7f9;
+  }
+  .layout-nav{
+    width: 420px;
+    margin: 0 auto;
   }
   .layout-assistant{
     width: 300px;

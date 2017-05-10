@@ -9,7 +9,7 @@ public class RecipeController extends Controller {
   /**
    * 页面
    */
-  public void Page() {
+  public void index() {
     render("/static/html/recipe.html");
   }
 
@@ -22,7 +22,7 @@ public class RecipeController extends Controller {
             getParaToInt("pageCurrent"),
             getParaToInt("pageSize"),
             "SELECT * ",
-            "FROM course " +
+            "FROM recipe " +
                     "WHERE name LIKE '%" + getPara("keyword") + "%' " +
                     "OR type LIKE '%" + getPara("keyword") + "%' " +
                     "OR season LIKE '%" + getPara("keyword") + "%' " +
@@ -75,4 +75,7 @@ public class RecipeController extends Controller {
   }
 
 
+  public void getVegetarian() {
+    Recipe.dao.find("SELECT * FROM recipe WHERE type='素菜'");
+  }
 }

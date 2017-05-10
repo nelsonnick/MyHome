@@ -28,7 +28,6 @@ public class Config extends JFinalConfig {
     public void configConstant(Constants me) {
         // 加载少量必要配置，随后可用PropKit.get(...)获取值
         PropKit.use("a_little_config.txt");
-        me.setViewType(ViewType.FREE_MARKER);
         me.setDevMode(false);
     }
 
@@ -37,7 +36,7 @@ public class Config extends JFinalConfig {
      */
     public void configRoute(Routes me) {
         me.add("/", Main.class);
-        me.add("/recipe", RecipeController.class);
+        me.add("/r", RecipeController.class);
     }
 
     /**
@@ -49,15 +48,13 @@ public class Config extends JFinalConfig {
         me.add(druidPlugin);
         // 配置ActiveRecord插件
         ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
-        arp.setBaseSqlTemplatePath(PathKit.getRootClassPath());
-        arp.addSqlTemplate("run.sql");
         _MappingKit.mapping(arp);
         me.add(arp);
         //配置任务调度插件
         Cron4jPlugin cp = new Cron4jPlugin();
 //        cp.addTask("0 0 9 * * ? ", new Lunch());
 //        cp.addTask("0 0 14 * * ? ", new Dinner());
-        cp.addTask("*/1 * * * *", new Lunch());
+//        cp.addTask("*/1 * * * *", new Lunch());
 //        cp.addTask("*/2 * * * *", new Dinner());
         me.add(cp);
 ;
