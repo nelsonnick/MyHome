@@ -8,6 +8,11 @@
       </Col>
     </Row>
     <Row>
+      <Breadcrumb>
+        <Breadcrumb-item>&nbsp;&nbsp;&nbsp;列表</Breadcrumb-item>
+      </Breadcrumb>
+    </Row>
+    <Row>
       <Col>
         <div>
           <div class="left"><Button type="info" size="large" @click="goAdd" >新增</Button></div>
@@ -129,10 +134,11 @@
             title: '操作',
             key: 'state',
             align: 'center',
-            width: 200,
+            width: 400,
             render (row, column, index) {
               return `
-              <i-button type="info" @click="goLook(${index})">网站链接</i-button>
+              <i-button type="primary" @click="goEdit(${index})">修改</i-button>
+              <i-button type="success" @click="goLook(${index})">网站链接</i-button>
               <i-button type="error" @click="showDelete(${index})">删除</i-button>
               `
             }
@@ -189,6 +195,9 @@
       },
       goLook (index) {
         window.open(this.pageList[index].url)
+      },
+      goEdit (index) {
+        this.$router.push({ path: '/edit/' + this.pageList[index].id })
       },
       goDelete () {
         this.$Loading.start()

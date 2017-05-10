@@ -52,12 +52,12 @@ public class Food {
   /**
    一荤一素一汤一主食
    */
-  public static String getFood4(String time, String season) {
+  public static String getFood4(String type1,String type2,String type3,String type4,String time, String season) {
     Recipe r1,r2,r3,r4;
-    r1= Recipe.dao.findById(getFoodId("素",time,season));
-    r2= Recipe.dao.findById(getFoodId("荤",time,season));
-    r3= Recipe.dao.findById(getFoodId("汤",time,season));
-    r4= Recipe.dao.findById(getFoodId("主",time,season));
+    r1= Recipe.dao.findById(getFoodId(type1,time,season));
+    r2= Recipe.dao.findById(getFoodId(type2,time,season));
+    r3= Recipe.dao.findById(getFoodId(type3,time,season));
+    r4= Recipe.dao.findById(getFoodId(type4,time,season));
     StringBuffer foods = new StringBuffer();
 
     foods.append(time+"餐推荐：").append("\n");
@@ -67,14 +67,12 @@ public class Food {
     foods.append("4：<a href=\"" + r4.getUrl() + "\">"+r4.getName()+"</a>");
     return foods.toString();
   }
-  /**
-   一荤一素一主食
-   */
-  public static String getFood3(String time, String season) {
+
+  public static String getFood3(String type1,String type2,String type3,String time, String season) {
     Recipe r1,r2,r3;
-    r1= Recipe.dao.findById(getFoodId("素",time,season));
-    r2= Recipe.dao.findById(getFoodId("荤",time,season));
-    r3= Recipe.dao.findById(getFoodId("主",time,season));
+    r1= Recipe.dao.findById(getFoodId(type1,time,season));
+    r2= Recipe.dao.findById(getFoodId(type2,time,season));
+    r3= Recipe.dao.findById(getFoodId(type3,time,season));
     StringBuffer foods = new StringBuffer();
 
     foods.append(time+"餐推荐：").append("\n");
@@ -83,13 +81,11 @@ public class Food {
     foods.append("3：<a href=\"" + r3.getUrl() + "\">"+r3.getName()+"</a>");
     return foods.toString();
   }
-  /**
-   一素一甜点
-   */
-  public static String getFood2(String time, String season) {
+
+  public static String getFood2(String type1,String type2,String time, String season) {
     Recipe r1,r2;
-    r1= Recipe.dao.findById(getFoodId("素",time,season));
-    r2= Recipe.dao.findById(getFoodId("甜",time,season));
+    r1= Recipe.dao.findById(getFoodId(type1,time,season));
+    r2= Recipe.dao.findById(getFoodId(type2,time,season));
     StringBuffer foods = new StringBuffer();
 
     foods.append(time+"推荐：").append("\n");
@@ -130,7 +126,7 @@ public class Food {
             .agentId(1000002) // 企业号应用ID
             .toUser("@all")
 //            .toUser("WangTianShuo")
-            .content(getFood4("早",season))
+            .content(getFood3("汤","主","甜","早",season))
             .build();
     try {
       WxService.getMe().messageSend(message);

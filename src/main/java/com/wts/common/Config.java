@@ -31,7 +31,7 @@ public class Config extends JFinalConfig {
      * 配置路由
      */
     public void configRoute(Routes me) {
-//        me.setBaseViewPath("/myhome");
+        me.setBaseViewPath("/myhome");
         me.add("/", Main.class);
         me.add("/r", RecipeController.class);
     }

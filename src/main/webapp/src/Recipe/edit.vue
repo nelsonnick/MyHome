@@ -9,7 +9,7 @@
     </Row>
     <Row>
       <Breadcrumb>
-        <Breadcrumb-item>&nbsp;&nbsp;&nbsp;新增</Breadcrumb-item>
+        <Breadcrumb-item>&nbsp;&nbsp;&nbsp;修改</Breadcrumb-item>
       </Breadcrumb>
     </Row>
     <Row>
@@ -105,17 +105,23 @@
         words4: '',
         object: {
           name: '',
-          url: '###',
-          type: '素菜'
+          url: '',
+          type: '',
+          time: '',
+          season: ''
         }
       }
     },
+    created: function () {
+      this.fetchData(this.$route.params.id)
+    },
+    watch: {
+      // 如果路由有变化，会再次执行该方法
+      '$route': 'fetchData'
+    },
     methods: {
       goReset () {
-        this.$refs.addForm.resetFields()
-        this.object.name = ''
-        this.object.url = '###'
-        this.object.type = '素菜'
+        this.fetchData(this.$route.params.id)
       },
       goSave () {
         if (this.time1) {
@@ -163,8 +169,9 @@
         this.$Loading.start()
         this.$Message.info('正在进行保存操作，请稍后...')
         this.$http.get(
-          API.save,
+          API.edit,
           { params: {
+            id: this.$route.params.id,
             name: this.object.name,
             url: this.object.url,
             type: this.object.type,
@@ -195,6 +202,59 @@
       },
       goBack () {
         this.$router.push({ path: '/list' })
+      },
+      fetchData (id) {
+        this.$http.get(
+          API.get,
+          { params: { id: id } },
+          { headers: { 'X-Requested-With': 'XMLHttpRequest' } }
+        ).then((response) => {
+          this.object = response.body
+          if (this.object.time.indexOf('早') >= 0) {
+            this.time1 = true
+          } else {
+            this.time1 = false
+          }
+          if (this.object.time.indexOf('午') >= 0) {
+            this.time2 = true
+          } else {
+            this.time2 = false
+          }
+          if (this.object.time.indexOf('晚') >= 0) {
+            this.time3 = true
+          } else {
+            this.time3 = false
+          }
+          if (this.object.time.indexOf('加') >= 0) {
+            this.time4 = true
+          } else {
+            this.time4 = false
+          }
+          if (this.object.season.indexOf('春') >= 0) {
+            this.season1 = true
+          } else {
+            this.season1 = false
+          }
+          if (this.object.season.indexOf('夏') >= 0) {
+            this.season2 = true
+          } else {
+            this.season2 = false
+          }
+          if (this.object.season.indexOf('秋') >= 0) {
+            this.season3 = true
+          } else {
+            this.season3 = false
+          }
+          if (this.object.season.indexOf('冬') >= 0) {
+            this.season4 = true
+          } else {
+            this.season4 = false
+          }
+        }, (response) => {
+          this.$Notice.error({
+            title: '服务器内部错误!'
+          })
+        })
       }
     }
   }

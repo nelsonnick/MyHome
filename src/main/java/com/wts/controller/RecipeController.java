@@ -27,7 +27,7 @@ public class RecipeController extends Controller {
                     "WHERE name LIKE '%" + getPara("keyword") + "%' " +
                     "OR type LIKE '%" + getPara("keyword") + "%' " +
                     "OR season LIKE '%" + getPara("keyword") + "%' " +
-                    "OR time LIKE '%" + getPara("keyword") + "%' ").getList());
+                    "OR time LIKE '%" + getPara("keyword") + "%' ORDER BY id DESC").getList());
   }
 
   /**
@@ -42,6 +42,12 @@ public class RecipeController extends Controller {
     renderText(count.toString());
   }
 
+  /**
+   * 获取
+   */
+  public void Get() {
+    renderJson(Recipe.dao.findById(getPara("id")));
+  }
 
   /**
    * 删除
@@ -73,6 +79,38 @@ public class RecipeController extends Controller {
         renderText("OK");
       } else {
         renderText("该菜品已存在！");
+      }
+    } else {
+      renderText("存在未填写的内容");
+    }
+  }
+
+  /**
+   * 修改
+   */
+  public void Edit() {
+    if (!StrKit.isBlank(getPara("name"))
+            && !StrKit.isBlank(getPara("url"))
+            && !StrKit.isBlank(getPara("time"))
+            && !StrKit.isBlank(getPara("season"))
+            && !StrKit.isBlank(getPara("type"))
+            ) {
+      Recipe object = Recipe.dao.findById(getPara("id"));
+      if (object != null) {
+        if (Recipe.dao.find("SELECT id FROM recipe WHERE name = ?", getPara("name").trim()).size() != 0
+                && !object.getStr("name").equals(getPara("name"))) {
+          renderText("该菜品已存在！");
+        } else {
+          object.set("name", getPara("name"))
+                  .set("url", getPara("url"))
+                  .set("time", getPara("time"))
+                  .set("season", getPara("season"))
+                  .set("type", getPara("type"))
+                  .update();
+          renderText("OK");
+        }
+      } else {
+        renderText("指定菜品不存在！");
       }
     } else {
       renderText("存在未填写的内容");

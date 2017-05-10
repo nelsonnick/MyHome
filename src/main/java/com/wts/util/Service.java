@@ -28,28 +28,28 @@ public class Service {
             if(inMessage.getEventKey().equals("A1")){
                 return WxCpXmlOutMessage
                         .TEXT()
-                        .content(getFood4("早",""))
+                        .content(getFood3("汤","主","甜","早",""))
                         .fromUser(inMessage.getToUserName())
                         .toUser(inMessage.getFromUserName())
                         .build();
             }else if (inMessage.getEventKey().equals("A2")) {
                 return WxCpXmlOutMessage
                         .TEXT()
-                        .content(getFood4("午",""))
+                        .content(getFood6("午",""))
                         .fromUser(inMessage.getToUserName())
                         .toUser(inMessage.getFromUserName())
                         .build();
             }else if (inMessage.getEventKey().equals("A3")) {
                 return WxCpXmlOutMessage
                         .TEXT()
-                        .content(getFood4("晚",""))
+                        .content(getFood6("晚",""))
                         .fromUser(inMessage.getToUserName())
                         .toUser(inMessage.getFromUserName())
                         .build();
             }else if (inMessage.getEventKey().equals("A4")) {
                 return WxCpXmlOutMessage
                         .TEXT()
-                        .content(getFood2("加",""))
+                        .content(getFood2("素","甜","加",""))
                         .fromUser(inMessage.getToUserName())
                         .toUser(inMessage.getFromUserName())
                         .build();
