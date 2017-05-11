@@ -11,6 +11,9 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 import com.wts.controller.Main;
 import com.wts.controller.RecipeController;
+import com.wts.controller.run.Breakfast;
+import com.wts.controller.run.Dinner;
+import com.wts.controller.run.Lunch;
 import com.wts.entity.model._MappingKit;
 
 /**
@@ -49,9 +52,9 @@ public class Config extends JFinalConfig {
         me.add(arp);
         //配置任务调度插件
         Cron4jPlugin cp = new Cron4jPlugin();
-//        cp.addTask("0 0 9 * * ? ", new Lunch());
-//        cp.addTask("0 0 14 * * ? ", new Dinner());
-//        cp.addTask("0 0 20 * * ? ", new Breakfast());
+        cp.addTask("0 0 10 * * ? ", new Lunch());
+        cp.addTask("0 0 15 * * ? ", new Dinner());
+        cp.addTask("0 0 20 * * ? ", new Breakfast());
 //        cp.addTask("*/1 * * * *", new Lunch());
 //        cp.addTask("*/2 * * * *", new Dinner());
         me.add(cp);
