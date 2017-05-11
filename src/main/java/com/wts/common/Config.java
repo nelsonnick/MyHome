@@ -90,6 +90,6 @@ public class Config extends JFinalConfig {
      * WebRoot
      */
     public static void main(String[] args) {
-        JFinal.start("src/main/webapp", 90, "/");
+        JFinal.start("src/main/webapp", 80, "/");
     }
 }
