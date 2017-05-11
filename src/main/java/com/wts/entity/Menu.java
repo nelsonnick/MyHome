@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
+  private static String BASIC = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+ParamesAPI.corpId+"&redirect_uri=http%3a%2f%2f"+ParamesAPI.URL+"%2f"+"XXXXX"+"&response_type=code&scope=snsapi_base&state=1#wechat_redirect";
 
   public static void main(String[] args) {
-
+    String Test = BASIC.replaceAll("XXXXX","r%2fs%2f");
+    System.out.println(Test);
     List<WxMenuButton> buttons = new ArrayList<WxMenuButton>();
     WxMenuButton button1 = new WxMenuButton();
     button1.setName("推荐早餐");
@@ -24,9 +26,10 @@ public class Menu {
     button2.setKey("2");
     button2.setType("click");
     WxMenuButton button3 = new WxMenuButton();
-    button3.setName("推荐晚餐");
+    button3.setName("链接");
     button3.setKey("1");
-    button3.setType("click");
+    button3.setType("view");
+    button3.setUrl(Test);
     buttons.add(button1);
     buttons.add(button2);
     buttons.add(button3);
@@ -35,8 +38,8 @@ public class Menu {
 
     WxCpInMemoryConfigStorage config = new WxCpInMemoryConfigStorage();
     config.setCorpId(ParamesAPI.corpId);
-    config.setCorpSecret(ParamesAPI.secret);
-    config.setAgentId(1000002);
+    config.setCorpSecret(ParamesAPI.secret3);
+    config.setAgentId(1000003);
     config.setToken(ParamesAPI.token);
     config.setAesKey(ParamesAPI.encodingAESKey);
 
@@ -47,5 +50,6 @@ public class Menu {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+    System.out.println("1111");
   }
 }

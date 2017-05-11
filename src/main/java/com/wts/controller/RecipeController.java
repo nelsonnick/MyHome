@@ -3,7 +3,10 @@ package com.wts.controller;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
+import com.wts.entity.WxService;
 import com.wts.entity.model.Recipe;
+import com.wts.entity.model.WxService3;
+import me.chanjar.weixin.cp.bean.WxCpUser;
 
 
 public class RecipeController extends Controller {
@@ -14,6 +17,15 @@ public class RecipeController extends Controller {
     render("/static/html/recipe.html");
   }
 
+  /**
+   * 页面
+   */
+  public void s() throws Exception{
+    String[] res = WxService3.getMe().oauth2getUserInfo(getPara("code"));
+    String userId = res[0];
+    WxCpUser user = WxService3.getMe().userGet(userId);
+    renderText(userId);
+  }
 
   /**
    * 查找
