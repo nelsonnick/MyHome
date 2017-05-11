@@ -15,7 +15,7 @@ import static com.wts.util.Service.getOutMessage;
 
 public class Main extends Controller {
 
-    public void callBack() throws IOException {
+    public void index() throws IOException {
 
         if (getRequest().getMethod() == "GET") {
             PrintWriter out = this.getResponse().getWriter();

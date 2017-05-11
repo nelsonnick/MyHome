@@ -105,7 +105,7 @@ public class Food {
 
   public static String queryFood(String name) {
     List<Recipe> recipes = Recipe.dao.paginate(1,
-            10,
+            20,
             "SELECT * ",
             "FROM recipe WHERE name LIKE '%"+name+"%'").getList();
     StringBuffer foods = new StringBuffer();
