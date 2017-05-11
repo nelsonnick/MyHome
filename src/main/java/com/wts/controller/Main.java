@@ -3,7 +3,6 @@ package com.wts.controller;
 import com.jfinal.core.Controller;
 import com.wts.entity.WxConfig;
 import com.wts.entity.WxService;
-import me.chanjar.weixin.cp.api.WxCpMessageRouter;
 import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
 import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 
@@ -14,7 +13,6 @@ import java.io.PrintWriter;
 import static com.wts.util.Service.getOutMessage;
 
 public class Main extends Controller {
-
     public void index() throws IOException {
 
         if (getRequest().getMethod() == "GET") {
@@ -39,5 +37,6 @@ public class Main extends Controller {
         } else {
             System.out.println("错误请求");
         }
+        renderNull();
     }
 }
