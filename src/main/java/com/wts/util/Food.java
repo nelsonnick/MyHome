@@ -88,19 +88,41 @@ public class Food {
     r2= Recipe.dao.findById(getFoodId(type2,time,season));
     StringBuffer foods = new StringBuffer();
 
-    foods.append(time+"推荐：").append("\n");
+    foods.append(time+"餐推荐：").append("\n");
     foods.append("<a href=\"" + r1.getUrl() + "\">"+r1.getName()+"</a>").append("\n");
     foods.append("<a href=\"" + r2.getUrl() + "\">"+r2.getName()+"</a>");
     return foods.toString();
   }
 
   public static String getFood(String type,String time, String season) {
-    Recipe r = Recipe.dao.findById(getFoodId(type,time,season));
+    Recipe r1,r2,r3,r4,r5;
+    String f1, f2, f3, f4,f5;
+    r1= Recipe.dao.findById(getFoodId(type,time,season));
+    f1 = r1.getName();
+    do {
+      r2= Recipe.dao.findById(getFoodId(type,time,season));
+      f2 = r2.getName();
+    } while (f1.equals(f2));
+    do {
+      r3= Recipe.dao.findById(getFoodId(type,time,season));
+      f3 = r3.getName();
+    } while (f3.equals(f2) || f3.equals(f1));
+    do {
+      r4= Recipe.dao.findById(getFoodId(type,time,season));
+      f4 = r4.getName();
+    } while (f4.equals(f3) ||f4.equals(f2) || f4.equals(f1));
+    do {
+      r5=Recipe.dao.findById(getFoodId(type,time,season));
+      f5 = r5.getName();
+    } while (f5.equals(f4) ||f5.equals(f3) ||f5.equals(f2) || f5.equals(f1));
     StringBuffer foods = new StringBuffer();
-
-    foods.append("推荐：").append("\n");
-    foods.append("<a href=\"" + r.getUrl() + "\">"+r.getName()+"</a>");
+    foods.append("1：<a href=\"" + r1.getUrl() + "\">"+f1+"</a>").append("\n");
+    foods.append("2：<a href=\"" + r2.getUrl() + "\">"+f2+"</a>").append("\n");
+    foods.append("3：<a href=\"" + r3.getUrl() + "\">"+f3+"</a>").append("\n");
+    foods.append("4：<a href=\"" + r4.getUrl() + "\">"+f4+"</a>").append("\n");
+    foods.append("5：<a href=\"" + r5.getUrl() + "\">"+f5+"</a>");
     return foods.toString();
+
   }
 
   public static String queryFood(String name) {
